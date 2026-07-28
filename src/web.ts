@@ -9,7 +9,7 @@ export const call = bridge({
     const os = /Mac/.test(ua) ? "macos" : /Win/.test(ua) ? "windows" : /Linux/.test(ua) ? "linux" : "web";
     return {
       os,
-      arch: (navigator as any).userAgentData?.platform ?? "wasm",
+      arch: /aarch64|arm64/i.test(ua) ? "aarch64" : /x86_64|Win64|x64/i.test(ua) ? "x86_64" : "unknown",
       family: os === "windows" ? "windows" : "unix",
       cores: navigator.hardwareConcurrency || 1,
       tauri: "2 (web build)",
